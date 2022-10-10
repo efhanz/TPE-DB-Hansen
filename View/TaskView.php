@@ -1,10 +1,17 @@
 <?php
 
-function showHome(){
-    $html = '<!DOCTYPE html>
+class TaskView{
+
+    function __construct()
+    {
+        
+    }
+
+    function showTasks($tasks) {
+        $html = '<!DOCTYPE html>
         <html lang="en">
         <head>
-            <base href="'.BASE_URL.'" />   
+            <base href="' . BASE_URL . '" />   
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,15 +24,19 @@ function showHome(){
             <h1>Tareas 2022</h1>
 
             <ul>';
-                $tasks = getTasks();
-                foreach($tasks as $tarea) {
-                    if ($tarea->finalizada ==1){
-                        $html.= '<li> <strike>'. $tarea->titulo . ': ' . $tarea->descripcion .' - '. '<a href="deleteTask/'.$tarea->id_tarea.'">Borrar</a> - <a href="Task/'.$tarea->id_tarea.'">Done</a>'.'</strike> </li>';
-                    } else {
-                $html.= '<li>'.'<a href="getTask/'.$tarea->id_tarea.'">'.$tarea->titulo.'</a>' . ': ' . $tarea->descripcion .' - '. '<a href="deleteTask/'.$tarea->id_tarea.'">Borrar</a> - <a href="updateTask/'.$tarea->id_tarea.'">Done</a>'.'</li>'; //1er columna de la tabla
-                 }}
-                
-                $html.= '      
+            foreach ($tasks as $tarea) {
+            if ($tarea->finalizada == 1) {
+                $html .= '<li> <strike>' . $tarea->titulo . ': ' . $tarea->descripcion . ' - ' . 
+                '<a href="deleteTask/' . $tarea->id_tarea . '" class="btn btn-outline-secondary btn-sm">Borrar</a> - <a 
+                href="Task/' . $tarea->id_tarea . '"class="btn btn-outline-secondary btn-sm">Done</a>' . '</strike> </li>';
+            } else {
+                $html .= '<li>' . '<a href="getTask/' . $tarea->id_tarea . '">' . $tarea->titulo . 
+                '</a>' . ': ' . $tarea->descripcion . ' - ' . '<a href="deleteTask/' . $tarea->id_tarea . 
+                '" class="btn btn-outline-danger btn-sm">Borrar</a> - <a href="updateTask/' . $tarea->id_tarea . '"class="btn btn-outline-success btn-sm">Done</a>' . '</li>'; //1er columna de la tabla
+            }
+        }
+
+        $html .= '      
             </ul>
 
             <!-- Example Code -->
@@ -66,48 +77,34 @@ function showHome(){
         </html>
         ';
         echo $html;
-        
-}
-function createTask(){
-    if (!isset($_POST['done'])){
-        $done = 0;
-    } else {
-            $done = 1;
-        }  
-    insertTask($_POST['title'], $_POST['description'], $_POST['priority'], $done);
-    header("Location: home");   
-}
-function deleteTask($id){
-    deleteTaskFromDB($id); 
-    header("Location: ".BASE_URL."home");
-}
+    }
+    function showHomeLocation(){
+        header("Location: ".BASE_URL."home"); 
+    }
 
-function updateTask($id) {
-    updatetaskfromDB($id);
-    header("Location: ".BASE_URL."home");
-}
-function getTask($id) {
-    $tarea = getTaskfromDB($id);
-    echo '
-    <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <base href="'.BASE_URL.'" />   
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
-            <title>Check List</title>
-        </head>
-        <body class="p-3 m-0 border-0 bd-example">
-        
+    function showTask($task){
+        echo '
+        <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <base href="'.BASE_URL.'" />   
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+                <title>Check List</title>
+            </head>
+            <body class="p-3 m-0 border-0 bd-example">
             
-            <h1>Titulo:'.$tarea->titulo.'</h1>
-            <h2>Descripción: '.$tarea->descripcion.'</h2>
-            <h3>Prioridad: '.$tarea->prioridad.'</h3>
-            <h3>Finalizada: '.$tarea->finalizada.'</h3>
-        
-        </body>
-        </html>
-    ' ;
+                
+                <h1>Titulo:'.$task->titulo.'</h1>
+                <h2>Descripción: '.$task->descripcion.'</h2>
+                <h3>Prioridad: '.$task->prioridad.'</h3>
+                <h3>Finalizada: '.$task->finalizada.'</h3>
+            
+            <a href="home">Volver</a>
+            </body>
+            </html>
+        ' ;
+    }
 }
