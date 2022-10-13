@@ -1,5 +1,5 @@
 <?php
-require_once "Controller/TaskController.php";
+require_once "Controller/SaleController.php";
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -14,24 +14,27 @@ else {
 // parsea la accion Ej: dev/juan --> ['dev', juan]
 $params = explode ('/', $action);
 
-$taskController = new TaskController();
+$saleController = new SaleController();
 
 // determina que camino seguir según la acción
 switch ($params[0]) {
     case 'home':
-        $taskController->showHome();
+        $saleController->showHome();
         break;
-    case 'createTask':
-        $taskController->createTask();
+    case 'showSales':
+        $saleController->getSales();
         break;
-    case 'deleteTask':
-        $taskController->deleteTask($params[1]);
+    case 'saleDetail':
+        $saleController->getSale($params[1]);
         break;
-    case 'updateTask':
-        $taskController->updateTask($params[1]);
+    case 'createSale':
+        $saleController->createSale();
         break;
-    case 'getTask':
-        $taskController->getTask($params[1]);
+    case 'deleteSale':
+        $saleController->deleteSale($params[1]);
+        break;
+    case 'updateSale':
+        $saleController->updateSale($params[1]);
         break;
     default:
         echo ('404 Page not found');
