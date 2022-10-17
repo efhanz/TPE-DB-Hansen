@@ -1,0 +1,30 @@
+<?php
+   //Creo la cuenta cuando venga en el POST
+   if(!empty($_POST['email'])&& !empty($_POST['password'])){
+       $userEmail=$_POST['email'];
+       $userPassword=password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+       //Guardo el nuevo usuario en la base de datos
+       $db = new PDO('mysql:host=localhost;'.'dbname=ejemploHashing;charset=utf8', 'root', '');
+       $query = $db->prepare('INSERT INTO users (email, password) VALUES (? , ?)');
+       $query->execute([$userEmail,$userPassword]);
+     
+   }
+   //Creo la cuenta cuando venga en el POST
+   if(!empty($_POST['email'])&& !empty($_POST['password'])){
+       $userEmail=$_POST['email'];
+       $userPassword=$_POST['password'];
+
+       //Obtengo el usuario de la base de datos
+       $db = new PDO('mysql:host=localhost;'.'dbname=ejemploHashing;charset=utf8', 'root', '');
+       $query = $db->prepare('SELECT * FROM users WHERE email = ?');
+       $query->execute([$userEmail]);
+       $user = $query->fetch(PDO::FETCH_OBJ);
+
+       //Si el usuario existe y las contraseñas coinciden
+       if($user && password_verify($userPassword,($user->password))){
+           echo "Acceso exitoso";
+       }else{
+           echo "Acceso denegado";
+       }
+   }
