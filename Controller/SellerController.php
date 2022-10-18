@@ -23,14 +23,14 @@ class SellerController
 
     function showSellers()
     {
-        $this->authHelper->checkLoggedIn(); 
+        
         $sellers = $this->model->getSellers();
         $this->view->showSellers($sellers);
     }
 
     function getSeller($id)
     {
-        $this->authHelper->checkLoggedIn(); 
+       
         $seller =  $this->model->getSellerFromDB($id);
         $this->view->showSellerDetail($seller);
     }
@@ -53,7 +53,7 @@ class SellerController
 
     function updateSeller($id)
     {
-         
+        $this->authHelper->checkLoggedIn(); 
 
         $id = $id;
         $seller = $_POST['seller'];

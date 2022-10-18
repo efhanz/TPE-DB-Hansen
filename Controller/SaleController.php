@@ -27,7 +27,7 @@ class SaleController
 
     function showSales()
     {
-        $this->authHelper->checkLoggedIn(); 
+        
 
         $seller = $this->model_seller->getSellers();
         $sales = $this->model->getSales();
@@ -35,7 +35,7 @@ class SaleController
     }
 
     function getSale($id) {
-        $this->authHelper->checkLoggedIn(); 
+       
 
         $sale =  $this->model->getSaleFromDB($id);
         $sellers = $this->model_seller->getSellers();
@@ -44,7 +44,7 @@ class SaleController
 
     function sellerfilter($id)
     {
-        $this->authHelper->checkLoggedIn();  
+       
 
         $id = $_POST['seller'];
       
@@ -71,7 +71,8 @@ class SaleController
     }
 
     function updateSale($id) {
-          
+        $this->authHelper->checkLoggedIn(); 
+
        
         $id = $id;
         $customer = $_POST['customer'];

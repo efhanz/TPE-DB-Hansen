@@ -4,23 +4,6 @@
   
   <h2 class="my-4 d-flex justify-content-center">{$titulo}</h2>
 
-  <!-- <table class="table">
-        <thead>
-            <tr>
-                <th scope="col"> Transaction_ID</th>
-                <th scope="col"> Customer</th>
-                <th scope="col"> Product</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{$sale->Transaction_ID}</td>
-                <td>{$sale->Customer}</td>
-                <td>{$sale->Product}</td>
-            </tr>
-        </tbody>
-    </table> -->
-
 
   <div class="container">
     <ul class="list-group">

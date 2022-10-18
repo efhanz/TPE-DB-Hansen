@@ -30,9 +30,16 @@
                 <a class="nav-link active" aria-current="page" href="showSeller">Sellers</a>
               </li>
             </ul>
+            <div>
+            <button class="d-flex btn btn-outline-success" role="search" type="submit">
+              <a href="login" class="nav-link active">Login</a>
+            </button>
+            </div>
+            <div>
             <button class="d-flex btn btn-outline-success" role="search" type="submit">
               <a href="logout" class="nav-link active">Logout</a>
             </button>
+            </div>
           </div>
         </div>
       </nav>

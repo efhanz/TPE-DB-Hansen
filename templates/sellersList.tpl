@@ -45,7 +45,7 @@
     <tbody>
       {foreach from=$sellers item=$seller}
         <tr>
-          <td>{$seller->Seller_ID}</a></td>
+          <td><a href="sellerDetail/{$seller->Seller_ID}" class="btn btn-outline-success btn-sm">{$seller->Seller_ID}</a></td>
           <td>{$seller->Seller}</td>
           <td>{$seller->Sales_Area}</td>
           <td>{$seller->Sales_Commission}</td>

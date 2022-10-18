@@ -7,6 +7,7 @@
   {* ---Formulario para agregar ventas --- *}
 
   <div class="dropdown d-flex justify-content-between my-4">
+  
     <div>
       <button class="btn btn-secondary btn-lg dropdown-toggle " type="button" data-bs-toggle="dropdown"
         aria-expanded="false">
