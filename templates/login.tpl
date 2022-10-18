@@ -1,24 +1,34 @@
-<div class="dropdown-menu">
-    <form class="px-4 py-3">
-      <div class="mb-3">
-        <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-      </div>
-      <div class="mb-3">
-        <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-      </div>
-      <div class="mb-3">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="dropdownCheck">
-          <label class="form-check-label" for="dropdownCheck">
-            Remember me
-          </label>
+{include file="header.tpl"}
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <h2>{$titulo}</h2>
+
+      <form class="form-alta" action="verify" method="post">
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
+          </div>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Sign in</button>
-    </form>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">New around here? Sign up</a>
-    <a class="dropdown-item" href="#">Forgot password?</a>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+          </div>
+        </div>
+        
+
+        <input type="submit" class="btn btn-primary" value="Login">
+        
+        
+      </form>
+    </div>
   </div>
+  <div class="row mb-3">
+  <h4 class="text-danger">{$error}</h4>
+  </div>
+</div>
+
+{include file="footer.tpl"}

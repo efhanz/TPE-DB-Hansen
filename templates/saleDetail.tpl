@@ -2,7 +2,7 @@
 
 <div class="container">
 
-    <h1>{$titulo}</h1>
+    <h1 class="my-4 d-flex justify-content-center">{$titulo}</h1>
 
     <table class="table">
         <thead>
@@ -31,47 +31,48 @@
             <li class="list-group-item">Unit_Price: {$sale->Unit_Price}</li>
             <li class="list-group-item">Amount: {$sale->Amount}</li>
         </ul>
+
     </div>
 
-
-    <div class="container text-center btn-group dropdown">
-        <button class="btn btn-secondary btn-lg " type="button" data-bs-toggle="dropdown" aria-expanded="true">
+<div class="
+container text-center btn-group">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
         - UPDATE THE SALE (if you're sure)-
         </button>
-        <div class="dropdown-menu dropdown-menu-dark dropdown dropdown-menu-end">
+        <div class="dropdown-menu dropdown-menu-dark dropdown dropdown-menu-end dropdown-menu-lg-start">Select the field to change and update it 
           <form class="row gx-3 gy-2 align-items-center container dropdown-menu-end " action="updateSale/{$sale->Transaction_ID}" method="post">
             <div class="col-sm-3">
-              <input type="text" name="customer" class="form-control" id="specificSizeInputName" placeholder="Customer">
+    
+              
+            <label>Customer</label><input type="text" name="customer" value="{$sale->Customer}" class="form-control" id="specificSizeInputName" placeholder="Customer">
             </div>
             <div class="col-sm-3">
-              <input type="text" name="invoice" class="form-control" id="specificSizeInputName" placeholder="Invoice #">
+            <label>Invoice #</label><input type="text" name="invoice" value="{$sale->Invoice}" class="form-control" id="specificSizeInputName" placeholder="Invoice #">
             </div>
             <div class="col-sm-3">
-              <input type="date" name="dates" class="form-control" id="specificSizeInputName" placeholder="Date">
+            <label>Date</label><input type="date" name="dates" value="{$sale->Date}" class="form-control" id="specificSizeInputName" placeholder="Date">
             </div>
             <div class="col-sm-3">
-              <label class="visually-hidden" for="specificSizeSelect">Preference</label>
-              <select type="number" class="form-select" id="priority" name="seller">
-                <option selected="">Choose Seller</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+              <label  for="specificSizeSelect">Seller</label>
+              <select type="number" class="form-select" id="priority" name="seller" value="{$sale->Seller}" >
+                    {foreach from=$sellers item=$seller}
+                         <option value='{$seller->Seller_ID}'>{$seller->Seller_ID} - {$seller->Seller}</option>
+                    {/foreach} 
+
               </select>
             </div>
             <div class="col-sm-3">
-              <input type="text" name="product" class="form-control" id="specificSizeInputName" placeholder="Product">
+            <label>Product</label><input type="text" name="product" value="{$sale->Product}" class="form-control" id="specificSizeInputName" placeholder="Product">
             </div>
             <div class="col-sm-3">
-              <input type="number" name="quantity" class="form-control" id="specificSizeInputName" placeholder="Quantity">
+            <label>Quantity</label><input type="number" name="quantity" value="{$sale->Quantity}" class="form-control" id="specificSizeInputName" placeholder="Quantity">
             </div>
             <div class="col-sm-3">
-              <input type="number" name="unitprice" class="form-control" id="specificSizeInputName"
+            <label>Unit_Price</label><input type="number" name="unitprice" value="{$sale->Unit_Price}" class="form-control" id="specificSizeInputName"
                 placeholder="Unit_Price">
             </div>
             <div class="col-sm-3">
-              <input type="number" name="amount" class="form-control" id="specificSizeInputName" placeholder="Amount">
+            <label>Amount</label><input type="number" name="amount" class="form-control" value="{$sale->Amount}" id="specificSizeInputName" placeholder="Amount">
             </div>
     
             <div class="col-auto">
@@ -82,7 +83,7 @@
         </div>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-outline-secondary"><a class="btn btn-secondary" href="showSales">On the top</a></button>
+      <button class="btn btn-outline-secondary"><a class="btn btn-secondary" href="showSales">Return</a></button>
       <button class="btn btn-outline-secondary"><a class="btn btn-secondary" href="home">Home</a></button>
       </div>
   
