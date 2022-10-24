@@ -18,19 +18,20 @@ class SellerController
 
     function showHome()
     {
+        session_start();
         $this->view->showHomev();
     }
 
     function showSellers()
     {
-        
+        session_start();
         $sellers = $this->model->getSellers();
         $this->view->showSellers($sellers);
     }
 
     function getSeller($id)
     {
-       
+        session_start();
         $seller =  $this->model->getSellerFromDB($id);
         $this->view->showSellerDetail($seller);
     }
@@ -67,8 +68,8 @@ class SellerController
             !empty($sales_commission)
 
         ) {
-            $sellerup = $this->model->updateSellerFromDB($seller, $sales_area, $sales_commission, $id);
-            $this->getSeller($id);
+            $this->model->updateSellerFromDB($seller, $sales_area, $sales_commission, $id);
+            header("Location: ".BASE_URL."sellerDetail/".$id); 
         }
     }
 }

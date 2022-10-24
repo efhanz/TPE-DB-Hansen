@@ -54,7 +54,7 @@ class SellerModel
     {
         $sentencia = $this->db->prepare("UPDATE sellers SET Seller=?, Sales_Area=?, Sales_Commission=? WHERE Seller_ID=?");
         $sentencia->execute(array($seller, $sales_area, $sales_commission, $id));
-        $sellerup = $sentencia->fetch(PDO::FETCH_OBJ);
-        return $sellerup;
+        $sellerupdated = $sentencia->fetch(PDO::FETCH_OBJ);
+        return $sellerupdated;
     }
 }

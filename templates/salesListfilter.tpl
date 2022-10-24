@@ -17,8 +17,10 @@
         <th scope="col">Quantity</th>
         <th scope="col">Unit_Price</th>
         <th scope="col">Amount</th>
+        {if isset($smarty.session.user_ID)}
         <th scope="col">Delete</th>
         <th scope="col">Update</th>
+        {/if}
       </tr>
     </thead>
     <tbody>
@@ -34,9 +36,10 @@
           <td>{$sale->Quantity}</td>
           <td>{$sale->Unit_Price}</td>
           <td>{$sale->Amount}</td>
+          {if isset($smarty.session.user_ID)}
           <td><a href="deleteSale/{$sale->Transaction_ID}" class="btn btn-outline-danger btn-sm">Delete</a></td>
-          <td><a href="saleDetail/{$sale->Transaction_ID}" class="btn btn-outline-success btn-sm">Display/Update</a>
-          </td>
+          <td><a href="saleDetail/{$sale->Transaction_ID}" class="btn btn-outline-success btn-sm">Display/Update</a></td>
+        {/if}
         </tr>
       {/foreach}
     </tbody>

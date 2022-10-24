@@ -5,12 +5,12 @@ class SaleModel
 
     private $db;
 
-    function __construct()
+    public function __construct()
     {
         $this->db = new PDO('mysql:host=localhost;' . 'dbname=tpe;charset=utf8', 'root', '');
     }
 
-    function getSales()
+    public function getSales()
     {
         $sentencia = $this->db->prepare("SELECT * FROM products_sales"); //prepare($sqlQuery) - permite la creación de una sentencia para su posterior uso:
         $sentencia->execute();  //execute($array) ejecuta la sentencia que tenemos preparada:
@@ -18,7 +18,7 @@ class SaleModel
         return $sales;  //Procesamos los datos para generar el HTML //foreach($tareas as $tarea)
     }
 
-    function getSaleFromDB($id)
+    public function getSaleFromDB($id)
     {
         $sentencia = $this->db->prepare("SELECT * FROM products_sales WHERE Transaction_ID=?");
         $sentencia->execute(array($id));
@@ -26,7 +26,7 @@ class SaleModel
         return $sale;
     }
 
-    function insertSale($customer, $invoice, $dates, $seller, $product, $quantity, $unitprice, $amount)
+    public function insertSale($customer, $invoice, $dates, $seller, $product, $quantity, $unitprice, $amount)
     {
         $sentencia = $this->db->prepare("INSERT INTO products_sales(Customer, Invoice, Date, Seller, Product, Quantity, Unit_Price, Amount) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
         $sentencia->execute(array($customer, $invoice, $dates, $seller, $product, $quantity, $unitprice, $amount));
@@ -45,8 +45,8 @@ class SaleModel
     {
         $sentencia = $this->db->prepare("UPDATE products_sales SET Customer=?, Invoice=?, Date=?, Seller=?, Product=?, Quantity=?, Unit_Price=?, Amount=? WHERE Transaction_ID=?");
         $sentencia->execute(array($customer, $invoice, $dates, $seller, $product, $quantity, $unitprice, $amount, $id));
-        $sale = $sentencia->fetch(PDO::FETCH_OBJ);
-        return $sale;
+        return $sentencia->fetch(PDO::FETCH_OBJ);
+        
     }
     function getSellerSaleFromDB($id)
     {

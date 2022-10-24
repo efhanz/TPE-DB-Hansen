@@ -9,25 +9,18 @@ class LoginController
     private $model;
     private $view;
 
-    function __construct()
+   public function __construct()
     {
         $this->model = new UserModel();
         $this->view = new LoginView();
     }
 
-    function logout()
-    {
-        session_start();
-        session_destroy();
-        $this->view->showLogin("You Logged out");
-    }
-
-    function login()
+    public function login()
     {
         $this->view->showLogin();
     }
 
-    function verifyLogin()
+    public function verifyLogin()
     {
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
             $email = $_POST['email'];
@@ -35,12 +28,14 @@ class LoginController
 
             // Obtengo el usuario de la base de datos
             $user = $this->model->getUser($email);
-
+           
             // Si el usuario existe y las contraseñas coinciden
             if ($user && password_verify($password, $user->password)) {
 
                 session_start();
-                $_SESSION["email"] = $email;
+                $_SESSION['user_ID'] = $user->id;
+                $_SESSION['user_email'] = $user->email;
+                $_SESSION['IS_LOGGED'] = true;
 
                 $this->view->showHome();
             } else {
@@ -49,5 +44,12 @@ class LoginController
         } else {
             $this->view->showLogin("Please complete all fields");
         }
+    }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        $this->view->showLogin("You Logged out");
     }
 }

@@ -18,17 +18,19 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
           </div>
         </div>
-        
+
 
         <input type="submit" class="btn btn-primary" value="Login">
-        
-        
+
+
       </form>
     </div>
   </div>
-  <div class="row mb-3">
-  <h4 class="text-danger">{$error}</h4>
-  </div>
+  {if $error}
+    <div class="row mb-3">
+      <h4 class="text-danger">{$error}</h4>
+    </div>
+  {/if}
 </div>
 
 {include file="footer.tpl"}

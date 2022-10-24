@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 
 <div class="container">
-  
+
   <h2 class="my-4 d-flex justify-content-center">{$titulo}</h2>
 
 
@@ -18,6 +18,7 @@
 </div>
 
 <div class="container">
+  {if isset($smarty.session.user_ID)}
   <div class="container text-center btn-group">
     <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
       data-bs-display="static" aria-expanded="false">
@@ -28,32 +29,33 @@
         action="updateSeller/{$seller->Seller_ID}" method="post">
 
 
-               <div class="col-sm-3">
+        <div class="col-sm-3">
           <label>Seller</label><input type="text" name="seller" value="{$seller->Seller}" class="form-control"
-            id="specificSizeInputName" placeholder="">
+            id="specificSizeInputName" placeholder="" required>
         </div>
 
         <div class="col-sm-3">
           <label>Sales_Area</label><input type="text" name="sales_area" value="{$seller->Sales_Area}"
-            class="form-control" id="specificSizeInputName" placeholder="">
+            class="form-control" id="specificSizeInputName" placeholder="" required>
         </div>
 
         <div class="col-sm-3">
           <label>Sales_Commission</label><input type="double" name="sales_commission"
-            value="{$seller->Sales_Commission}" class="form-control" id="specificSizeInputName" placeholder="">
+            value="{$seller->Sales_Commission}" class="form-control" id="specificSizeInputName" placeholder="" required>
         </div>
 
         <div class="col-auto">
-          <button type="submit" class="btn btn-dark">Send</button>
+          <input type="submit" class="btn btn-dark" value="Send">
         </div>
 
       </form>
 
     </div>
   </div>
-
+  {/if}
 
 </div class="container">
+
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
   <button class="btn btn-outline-secondary"><a class="btn btn-secondary" href="showSeller">Return</a></button>
   <button class="btn btn-outline-secondary"><a class="btn btn-secondary" href="home">Home</a></button>

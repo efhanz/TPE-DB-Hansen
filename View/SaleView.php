@@ -2,13 +2,15 @@
 
 require_once "./libs/smarty-4.2.1/libs/Smarty.class.php";
 
+
 class SaleView{
 
     private $smarty;
-
-    function __construct()
+   
+   public function __construct()
     {
         $this->smarty = new Smarty();
+        
     }
 
     function showHomev() { 

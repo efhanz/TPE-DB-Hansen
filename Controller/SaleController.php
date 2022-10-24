@@ -11,41 +11,43 @@ class SaleController
     private $model_seller;
     private $authHelper;
     
-    function __construct()
+    public function __construct()
     {
+        
         $this->model = new SaleModel();
         $this->view = new SaleView();
         $this->model_seller = new SellerModel();
-        $this->view_seller = new SellerView();
         $this->authHelper = new AuthHelper();
+       
     }
 
-    function showHome()
+    public function showHome()
     { 
+        session_start();
         $this->view->showHomev();
     }
 
-    function showSales()
+    public function showSales()
     {
         
-
+        session_start();
         $seller = $this->model_seller->getSellers();
         $sales = $this->model->getSales();
         $this->view->showSales($sales, $seller);
     }
 
-    function getSale($id) {
+    public function getSale($id) {
        
-
+        session_start();
         $sale =  $this->model->getSaleFromDB($id);
         $sellers = $this->model_seller->getSellers();
         $this->view->showSaleDetail($sale, $sellers);
     }
 
-    function sellerfilter($id)
+    public function sellerfilter($id)
     {
        
-
+        session_start();
         $id = $_POST['seller'];
       
         if (
@@ -60,7 +62,7 @@ class SaleController
         $this->authHelper->checkLoggedIn(); 
 
         $this->model->insertSale($_POST['customer'], $_POST['invoice'], $_POST['dates'], $_POST['seller'], $_POST['product'], $_POST['quantity'], $_POST['unitprice'], $_POST['amount']);
-        $this->showSales(); 
+        header("Location: ".BASE_URL."showSales"); 
     }
 
     function deleteSale($id){
@@ -96,8 +98,8 @@ class SaleController
             !empty($amount)
         ) {
            
-             $sale = $this->model->updateSaleFromDB($customer, $invoice, $dates, $seller, $product, $quantity, $unitprice, $amount, $id);
-            $this->getSale($id);
+            $this->model->updateSaleFromDB($customer, $invoice, $dates, $seller, $product, $quantity, $unitprice, $amount, $id);
+            header("Location: ".BASE_URL."saleDetail/".$id); 
     }}
 
     

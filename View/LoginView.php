@@ -6,20 +6,20 @@ class LoginView{
 
     private $smarty;
 
-    function __construct()
+    public function __construct()
     {
         $this->smarty = new Smarty();
     }
 
-    function showLogin($error = "")
+    function showLogin($error = null)
     {
         $this->smarty->assign('titulo', 'Log In');
         $this->smarty->assign('error', $error);
         $this->smarty->display('templates/login.tpl');
     }
 
-function showHome(){
-    header("Location: ".BASE_URL."home"); 
-}
+    function showHome(){
+        header("Location: ".BASE_URL."home"); 
+    }
 
 }
